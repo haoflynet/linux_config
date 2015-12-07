@@ -12,5 +12,8 @@ cp ./sources.list/$sources_name /etc/apt/sources.list
 # 更新
 sudo apt-get update && sudo apt-get upgrade -y
 
-# VIM安装与配置
+# VIM
 sudo apt-get install vim -y
+
+# tree
+sudo apt-get install tree
