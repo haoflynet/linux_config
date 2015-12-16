@@ -17,14 +17,30 @@ cp ./sources.list/$sources_name /etc/apt/sources.list
 apt-get update && apt-get upgrade -y
 
 # 安装系统常用软件
-apt-get install tree build-essential git -y
+apt-get install tree build-essential git curl -y
 
 # VIM安装与配置
 apt-get install vim -y
+ln vim/vimrc ~/.vimrc
+if [ ! -d ~/.vim ] ; then
+	mkdir ~/.vim
+fi
+if [ ! -d ~/.vim/autoload ] ; then
+	mkdir ~/.vim/autoload
+fi
+if [ ! -d ~/.vim/bundle ] ; then
+	mkdir ~/.vim/bundle
+fi
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+# 目录树插件
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+git clone https://github.com/jistr/vim-nerdtree-tabs ~/.vim/bundle/vim-nerdtree-tabs
+
 
 # Python3安装与配置
 apt-get install python3 python3-dev python3-pip python-pip -y
 pip install requests beautifulsoup4 
+
 
 # bypy百度云安装与配置
 if [ "$need_baiduyun" = true ] ; then

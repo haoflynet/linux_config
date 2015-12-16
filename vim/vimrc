@@ -1,0 +1,37 @@
+"haofly
+
+call pathogen#infect()
+
+" 常用快捷键
+" :sv <filename>打开一个文件，纵向分隔布局
+" :vs <filename>打开一个文件，横向分隔
+" :ctrl-k, ctrl-j, ctrl-h, ctrl-l:上下左右切换布局
+set tabstop=4		    "制表符长度
+set shiftwidth=4	    "缩进长度
+set softtabstop=4
+set fileformat=unix
+set encoding=utf-8
+set expandtab		    "空格替代制表符
+set smartindent		    "智能缩进
+set number		        "显示行号
+set ruler               "显示位置
+set ignorecase          "搜索时忽略大小写
+set hls                 "搜索时高亮显示
+set helplang=cn         "设置为中文
+set foldmethod=syntax   "代码折叠
+set nowrap              "禁止自动换行
+
+
+"目录树插件设置
+map <C-l> :tabn<cr>     "下一个tab
+map <C-h> :tabp<cr>     "上一个tab
+map <C-n> :tabnew<cr>   "新tab
+map <C-k> :bn<cr>       "下一个文件
+map <C-j> :bp<cr>       "上一个文件
+"let g:nerdtree_tabs_open_on_console_startup=1   "打开vim的时候默认打开目录树
+map <leader>n <plug>NERDTreeTabsToggle <CR> "设置打开目录树的快捷键为\+n
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
