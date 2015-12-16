@@ -17,7 +17,7 @@ cp ./sources.list/$sources_name /etc/apt/sources.list
 apt-get update && apt-get upgrade -y
 
 # 安装系统常用软件
-apt-get install tree
+apt-get install tree build-essential
 
 # VIM安装与配置
 apt-get install vim -y
