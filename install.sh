@@ -24,10 +24,10 @@ apt-get install vim -y
 
 # Python3安装与配置
 apt-get install python3 python3-dev python3-pip
-pip install requests 
+pip install requests beautifulsoup4 
 
 # bypy百度云安装与配置
-if [ "need_baiduyun" = true ] ; then
+if [ "$need_baiduyun" = true ] ; then
 	echo "前往下列地址获取授权码，待会儿在Enter之前需要将其粘贴到终端"
 	echo "http://openapi.baidu.com/oauth/2.0/authorize?scope=basic+netdisk&redirect_uri=oob&response_type=code&client_id=q8WE4EpCsau1oS0MplgMKNBn"
 	mkdir ~/download
