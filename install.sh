@@ -2,6 +2,8 @@
 
 # author:haofly
 
+current_path=`pwd`
+
 # 设置非必要的组件
 need_sftp=true
 need_baiduyun=true
@@ -17,11 +19,11 @@ cp ./sources.list/$sources_name /etc/apt/sources.list
 apt-get update && apt-get upgrade -y
 
 # 安装系统常用软件
-apt-get install tree build-essential git curl -y
+apt-get install tree build-essential cmake git curl -y
 
 # VIM安装与配置
 apt-get install vim -y
-ln vim/vimrc ~/.vimrc
+ln ./vim/vimrc ~/.vimrc
 if [ ! -d ~/.vim ] ; then
 	mkdir ~/.vim
 fi
@@ -35,7 +37,23 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 # 目录树插件
 git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 git clone https://github.com/jistr/vim-nerdtree-tabs ~/.vim/bundle/vim-nerdtree-tabs
-
+git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
+git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
+# YouCompleteMe需要安装一些特殊的东西
+git submodule update --init --recursive
+# 如果需要更新vim
+# sudo add-apt-repository ppa:fcwu-tw/ppa
+# sudo apt-get update
+# sudo apt-get install vim
+# YouCompleteMe版本过低还要升级，官网下载https://cmake.org/download/
+# cd ~/download/
+# wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz
+# tar xf cmake-3.4.1.tar.gz
+# cd cmake-3.4.1
+# ./configure
+# apt-get install chekinstall
+# make && checkinstall
+# cd current_path
 
 # Python3安装与配置
 apt-get install python3 python3-dev python3-pip python-pip -y

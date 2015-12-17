@@ -20,6 +20,8 @@ set hls                 "搜索时高亮显示
 set helplang=cn         "设置为中文
 set foldmethod=syntax   "代码折叠
 set nowrap              "禁止自动换行
+let python-highlight_all
+syntax on
 
 
 "目录树插件设置
@@ -30,6 +32,7 @@ map <C-k> :bn<cr>       "下一个文件
 map <C-j> :bp<cr>       "上一个文件
 "let g:nerdtree_tabs_open_on_console_startup=1   "打开vim的时候默认打开目录树
 map <leader>n <plug>NERDTreeTabsToggle <CR> "设置打开目录树的快捷键为\+n
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree 	"隐藏指定后缀
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
