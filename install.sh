@@ -19,7 +19,7 @@ cp ./sources.list/$sources_name /etc/apt/sources.list
 apt-get update && apt-get upgrade -y
 
 # 安装系统常用软件
-apt-get install tree build-essential cmake git curl -y
+apt-get install tree build-essential cmake git curl unzip -y
 
 # VIM安装与配置
 apt-get install vim -y
