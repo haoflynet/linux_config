@@ -5,8 +5,9 @@
 current_path=`pwd`
 
 # 设置非必要的组件
-need_sftp=true
-need_baiduyun=true
+need_sftp=true		# sftp
+need_baiduyun=false # 百度云服务
+need_mail=false 	# 邮件服务，以及登录自动发送邮件
 
 # 安装配置更新源
 version=`head -n 1 /etc/issue | awk '{print $1}'`
@@ -99,4 +100,19 @@ if [ "$need_sftp" = true ] ; then
     chown "$ftp_user":"$ftp_user" "$ftp_path"
     passwd "$ftp_user"
     service vsftpd restart
+fi
+
+# 邮件服务
+if ["$need_mail" = true ] ; then
+	apt-get install mailutils -y
+	read -p "输入目标邮箱：" email
+	if [! -n "$email" ] ; then
+		email="admin@haofly.net"
+	fi
+	sendmail -t <<EOF
+	to:896499825@qq.com
+	from:896499825@qq.com
+	subject:$USER@`hostname` login from ${SSH_CLIENT%% *}
+	$USER@`hostname` login from ${SSH_CLIENT%% *}
+EOF
 fi
