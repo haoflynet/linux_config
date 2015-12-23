@@ -50,7 +50,7 @@ git submodule update --init --recursive
 # wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz
 # tar xf cmake-3.4.1.tar.gz
 # cd cmake-3.4.1
-# ./configure
+# ./configure --enable-pythoninterp=yes   # 如果是python3那么就是--enable-python3interp=yes
 # apt-get install chekinstall
 # make && checkinstall
 # cd current_path
