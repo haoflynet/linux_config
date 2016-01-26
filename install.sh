@@ -106,13 +106,14 @@ fi
 if ["$need_mail" = true ] ; then
 	apt-get install mailutils -y
 	read -p "输入目标邮箱：" email
-	if [! -n "$email" ] ; then
+	if [ ! -n "$email" ] ; then
 		email="admin@haofly.net"
 	fi
-	sendmail -t <<EOF
-	to:896499825@qq.com
-	from:896499825@qq.com
+	echo -E "
+sendmail -t <<EOF
+	to:""$email""
+	from:""$email"'
 	subject:$USER@`hostname` login from ${SSH_CLIENT%% *}
 	$USER@`hostname` login from ${SSH_CLIENT%% *}
-EOF
+EOF' >> ~/.bashrc
 fi
