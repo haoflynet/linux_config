@@ -2,10 +2,18 @@
 
 # author:haofly
 
+current_path=`pwd`
+
 # 设置非必要的组件
+<<<<<<< HEAD
 need_sftp=true
 need_baiduyun=true
 need_ClamAV=true	# 杀毒软件
+=======
+need_sftp=true		# sftp
+need_baiduyun=false # 百度云服务
+need_mail=false 	# 邮件服务，以及登录自动发送邮件
+>>>>>>> 98eb4564b99f1ccfcee978d22ff4593a0e9d4be0
 
 # 安装配置更新源
 version=`head -n 1 /etc/issue | awk '{print $1}'`
@@ -18,11 +26,11 @@ cp ./sources.list/$sources_name /etc/apt/sources.list
 apt-get update && apt-get upgrade -y
 
 # 安装系统常用软件
-apt-get install tree build-essential git curl -y
+apt-get install tree build-essential cmake git curl unzip -y
 
 # VIM安装与配置
 apt-get install vim -y
-ln vim/vimrc ~/.vimrc
+ln ./vim/vimrc ~/.vimrc
 if [ ! -d ~/.vim ] ; then
 	mkdir ~/.vim
 fi
@@ -36,7 +44,23 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 # 目录树插件
 git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 git clone https://github.com/jistr/vim-nerdtree-tabs ~/.vim/bundle/vim-nerdtree-tabs
-
+git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
+git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
+# YouCompleteMe需要安装一些特殊的东西
+git submodule update --init --recursive
+# 如果需要更新vim
+# sudo add-apt-repository ppa:fcwu-tw/ppa
+# sudo apt-get update
+# sudo apt-get install vim
+# YouCompleteMe版本过低还要升级，官网下载https://cmake.org/download/
+# cd ~/download/
+# wget https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz
+# tar xf cmake-3.4.1.tar.gz
+# cd cmake-3.4.1
+# ./configure --enable-pythoninterp=yes   # 如果是python3那么就是--enable-python3interp=yes
+# apt-get install chekinstall
+# make && checkinstall
+# cd current_path
 
 # Python3安装与配置
 apt-get install python3 python3-dev python3-pip python-pip -y
@@ -82,4 +106,20 @@ if [ "$need_sftp" = true ] ; then
     chown "$ftp_user":"$ftp_user" "$ftp_path"
     passwd "$ftp_user"
     service vsftpd restart
+fi
+
+# 邮件服务
+if ["$need_mail" = true ] ; then
+	apt-get install mailutils -y
+	read -p "输入目标邮箱：" email
+	if [ ! -n "$email" ] ; then
+		email="admin@haofly.net"
+	fi
+	echo -E "
+sendmail -t <<EOF
+	to:""$email""
+	from:""$email"'
+	subject:$USER@`hostname` login from ${SSH_CLIENT%% *}
+	$USER@`hostname` login from ${SSH_CLIENT%% *}
+EOF' >> ~/.bashrc
 fi
