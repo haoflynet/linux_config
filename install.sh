@@ -5,6 +5,7 @@
 # 设置非必要的组件
 need_sftp=true
 need_baiduyun=true
+need_ClamAV=true	# 杀毒软件
 
 # 安装配置更新源
 version=`head -n 1 /etc/issue | awk '{print $1}'`
