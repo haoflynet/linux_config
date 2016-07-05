@@ -27,3 +27,10 @@ yum install nginx -y
 yum install mariadb-server mariadb mariadb-devel -y
 yum install mariadb-devel
 pip3 install -r requirements.txt
+
+## 安装docker
+yum install docker-engine
+service docker start
+
+## 安装splash
+docker pull scrapinghub/splash
