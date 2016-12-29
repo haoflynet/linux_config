@@ -7,7 +7,7 @@
 yum update && yum upgrade -y
 
 ## 安装常用软件
-yum install vim tree git curl unzip epel-release gcc-c++ make -y
+yum install vim tree git curl unzip epel-release gcc-c++ make net-tools -y
 
 ## Python3的安装与配置
 yum install python34 python34-setuptools python34-devel python-pip -y
